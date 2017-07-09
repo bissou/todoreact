@@ -20,17 +20,17 @@ import Note from './android/app/Note';
 export default class FirstWorkingProject extends Component {
 
     state = {
-        noteArray :[],
+        noteArray :[{'note':'test1'}],
         noteText : '',
+        Isfinish: false,
 
     }
     addNote() {
    alert(this.state.noteText);
    if(this.state.noteText)
    {
-       var  c = this.state.noteText.value.toString();
-       var d = new Date();
-       this.state.noteArray.push( {'date' : d.getFullYear()+ "-" + (d.getMonth() +1 ) + "-" + (d.getDate()) + "\n" + 'note': c });
+
+       this.state.noteArray.push( {'note': this.state.noteText });
        this.setState( {noteArray:  this.state.noteArray});
        this.setState({noteText : ''});
 
