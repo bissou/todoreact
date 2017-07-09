@@ -20,38 +20,58 @@ import Note from './android/app/Note';
 export default class FirstWorkingProject extends Component {
 
     state = {
-        noteArray :[{'note':'test1'}],
+        noteArray :[{note:'test1',isfinish : false},{note:'test2',isfinish : true}],
         noteText : '',
-        Isfinish: false,
+    };
 
-    }
+    toggleState = (val) => {
+        //alert(val);
+        val.isfinish = !val.isfinish;
+        alert(val.isfinish);
+        // this.stylNote   = this.props.val.isfinish ? styles.noteTextFinished : styles.noteText;
+    };
+
     addNote() {
-   alert(this.state.noteText);
-   if(this.state.noteText)
-   {
+        alert(this.state.noteText);
+       if(this.state.noteText)
+       {
+           this.state.noteArray.push( {note: this.state.noteText, isfinish: false });
+           // this.setState( {noteArray:  this.state.noteArray});
+           this.setState({noteText : ''});
 
-       this.state.noteArray.push( {'note': this.state.noteText });
-       this.setState( {noteArray:  this.state.noteArray});
-       this.setState({noteText : ''});
-
-   }
-
-
+       }
     }
-    deleteNote()
+    changeColorNote()
     {
-  this.state.noteArray.splice(key,1);
-  this.setState({noteArray: this.state.noteArray});
+ const textColor =this.state.Isfinish ? '#fff': 'red'
 
+
+
+
+       // if ( this.state.Isfinish == false)
+       // { this.state.Isfinish = true;}
     }
 
 
     render() {
 
-        let notes = this.state.noteArray.map((val,key)=> {
+        let notes = [];
+        for(let i= 0; i < this.state.noteArray.length ; i++)
+        {
+            notes.push( <Note key={i}
+                         val={this.state.noteArray[i]}
+                         toggleState={()=> {
+                             this.state.noteArray[i].isfinish = true;
+                             this.setState({noteArray: this.state.noteArray}) }} />);
 
-            return <Note key={key} keyval={key} val={val} deleteMethode={ ()=>this.deleteNote(key)} />
-        });
+        }
+       /* let notes = this.state.noteArray.map((val,key)=> {
+
+            return <Note key={key}
+                         keyval={key}
+                         val={val}
+                         toggleState={ ()=>this.toggleState(val)} />
+        });*/
 
 
         return (

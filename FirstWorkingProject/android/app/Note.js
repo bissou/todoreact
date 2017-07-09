@@ -9,10 +9,11 @@ import {
 
 export default class FirstWorkingProject extends Component {
     render() {
+       const stylNote = this.props.val.isfinish ? styles.noteTextFinished : styles.noteText;
         return (
             <View key={this.props.keyval}style={styles.note}>
-                <Text style={styles.noteText}>{this.props.val.note}</Text>
-                <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
+                <Text style={stylNote}>{this.props.val.note}</Text>
+                <TouchableOpacity onPress={this.props.toggleState} style={styles.noteDelete}>
                     <Text style={styles.noteDeleteText}> - </Text>
                 </TouchableOpacity>
             </View>
@@ -35,12 +36,17 @@ const styles = StyleSheet.create({
         },
 
     noteText :{
+        color: 'black',
         paddingLeft : 20,
         borderLeftColor : '#E91E63',
     },
-
+    noteTextFinished :{
+        paddingLeft : 20,
+        color : '#E91E63',
+        borderLeftColor : '#E91E63',
+    },
     noteDelete : {
-position : 'absolute',
+        position : 'absolute',
         justifyContent : 'center',
         alignItems : 'center',
         backgroundColor : '#252580',
